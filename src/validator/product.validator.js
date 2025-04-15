@@ -13,3 +13,15 @@ export function productValidator(data){
 
     return validator.validate(data)
 }
+
+export function getProductValidator(data){
+    const validator = Joi.object({
+        page: Joi.number().required(),
+        limit: Joi.number().required(),
+        search: Joi.string().optional(),
+        // query: Joi.object({
+        // })
+    })
+
+    return validator.validate(data)
+}

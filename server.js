@@ -10,6 +10,7 @@ var app = express();
 var http = require('http');
 var authRouter = require('./src/routes/auth.route');
 var productRouter = require('./src/routes/product.route');
+var cartRouter = require('./src/routes/cart.route');
 const authenticateToken = require('./core/auth.middleware');
 
 
@@ -27,6 +28,7 @@ mongoConnection()
 app.use('/auth', authRouter)
 app.use(authenticateToken)
 app.use('/product', productRouter)
+app.use('/cart', cartRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

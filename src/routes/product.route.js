@@ -1,12 +1,14 @@
 const express = require('express')
-const ProductModel = require('../model/product.model')
-const { productValidator } = require('../validator/product.validator')
-const productModel = require('../model/product.model')
+const { productValidator, getProductValidator } = require('../validator/product.validator')
 const { createProduct, getProduct } = require('../services/product.service')
 const router = express.Router()
 
 router.get('/', async(req, res) => {
     try {
+        const { error } = getProductValidator(req.query)
+        if(error){
+            res.send({ success: false, message: JSON.stringify(error) })
+        }
         const response = await getProduct(req)
         res.send(response)
     } catch (error){
